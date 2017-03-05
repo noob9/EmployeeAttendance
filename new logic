@@ -1,0 +1,75 @@
+Logic.
+
+Save the state in the object, get the values from adapter when they press save. 
+
+//public class EmployeeDetails
+public boolean isPresent() {
+    return isPresent;
+}
+
+public void setPresent(boolean present) {
+    isPresent = present;
+}
+
+public boolean isPresent;
+
+
+//public class MyAdapter
+holder.p.setOnClickListener(new View.OnClickListener() {
+    @Override
+        public void onClick(View v) {
+        if (holder.p.isChecked()) {
+            String pText = (String) holder.p.getText();
+            Toast.makeText(MyAdapter.context, pText, Toast.LENGTH_SHORT).show();
+            employee.setPresent(true);
+        }
+        else {
+
+        }
+    }
+});
+
+holder.a.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+
+        if (holder.a.isChecked()) {
+            String pText = (String) holder.a.getText();
+            Toast.makeText(MyAdapter.context, pText, Toast.LENGTH_SHORT).show();
+            employee.setPresent(false);
+        } else {
+
+        }
+    }
+});
+
+
+//this is to keep the state when u have a big list of employees, (while recycler view starts recycling the views)
+if(employee.isPresent){
+    holder.p.setSelected(true);
+}
+else {
+    holder.a.setSelected(true);
+}
+
+public ArrayList<EmployeeDetails> getUpdatedList(){
+    return dbList;
+}
+
+
+//public class Employees
+private MyAdapter mAdapter;
+img_submit.setOnClickListener(new View.OnClickListener(){
+    @Override
+    public void onClick(View v){
+        Toast.makeText(getContext(), "Timepass", Toast.LENGTH_SHORT).show();
+        ArrayList<EmployeeDetails> list =   mAdapter.getUpdatedList();
+
+        for( EmployeeDetails emp : list){
+           Log.d("EmployeeDetails","Name: " + emp.getName1()+"Preset: " + emp.isPresent);
+	   // Do the validations and insert db here 
+        }
+
+
+    }
+});
